@@ -9,7 +9,7 @@ This project involves replicating and extending the findings of the Baron et al.
 
 3. **Cluster Marker Genes**: Identifying marker genes for each cluster, labeling clusters based on markers, and discovering novel marker genes. 
 
-4. **In-depth Marker Gene Analysis**: For 4-person groups, conducting gene set enrichment analysis on the marker genes for each cluster.
+4. **In-depth Marker Gene Analysis**: Conducting gene set enrichment analysis on the marker genes for each cluster.
 
 5. **Discuss Findings**: Discussing findings with team members, comparing results to those in the Baron et al. study. 
 
