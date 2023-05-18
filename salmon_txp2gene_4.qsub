@@ -1,0 +1,24 @@
+#!/bin/bash -l
+
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+
+echo "Running job $JOB_ID"
+echo "Started: $(date +%F)"
+echo "Running in directory: $PWD"
+
+module load salmon
+
+# Establish the mapping 
+gunzip -c /projectnb/bf528/users/group_3/Project_4/Data_Curator/gencode.v43.basic.annotation.gtf.gz > /projectnb/bf528/users/group_3/Project_4/Data_Curator/gencode.v43.basic.annotation.gtf
+
+echo "gtf unzip finished: $(date +%F)"
+
+
+awk '$3 == "transcript" {print $12 "\t" $10}' /projectnb/bf528/users/group_3/Project_4/Data_Curator/gencode.v43.basic.annotation.gtf | \
+sed -e 's/[";]//g' > /projectnb/bf528/users/group_3/Project_4/Data_Curator/transcript_to_gene_map.tsv
+
+echo "Transctits gene mapping finished: $(date +%F)"

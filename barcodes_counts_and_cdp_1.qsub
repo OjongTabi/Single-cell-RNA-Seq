@@ -1,0 +1,44 @@
+#!/bin/bash -l
+
+#$ -cwd
+#$ -P bf528
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+#$ -l h_rt=48:00:00
+
+echo "Running job $JOB_ID"
+echo "Started: $(date +%F)"
+echo "Running in directory: $PWD"
+
+
+# SRR3879604_1_bc barcode counts
+zcat /projectnb/bf528/users/group_3/Project_4/Data_Curator/fastq/SRR3879604_1_bc.fastq.gz | \
+awk 'NR % 4 == 2' | \
+cut -c 1-19 | \
+sort | \
+uniq -c | \
+awk '{print $2 "\t" $1}' > /projectnb/bf528/users/group_3/Project_4/Data_Curator/SRR3879604_barcode_counts.txt
+
+echo "SRR3879604_1_bc barcode counts finished: $(date +%F)"
+
+# SRR3879605_1_bc barcode counts
+zcat /projectnb/bf528/users/group_3/Project_4/Data_Curator/fastq/SRR3879605_1_bc.fastq.gz | \
+awk 'NR % 4 == 2' | \
+cut -c 1-19 | \
+sort | \
+uniq -c | \
+awk '{print $2 "\t" $1}' > /projectnb/bf528/users/group_3/Project_4/Data_Curator/SRR3879605_barcode_counts.txt
+
+echo "SRR3879605_1_bc barcode counts finished: $(date +%F)"
+
+# SRR3879606_1_bc barcode counts
+zcat /projectnb/bf528/users/group_3/Project_4/Data_Curator/fastq/SRR3879606_1_bc.fastq.gz | \
+awk 'NR % 4 == 2' | \
+cut -c 1-19 | \
+sort | \
+uniq -c | \
+awk '{print $2 "\t" $1}' > /projectnb/bf528/users/group_3/Project_4/Data_Curator/SRR3879606_barcode_counts.txt
+
+echo "SRR3879606_1_bc barcode counts finished: $(date +%F)"
+
+echo "Job finished: $(date +%F)"

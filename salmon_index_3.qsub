@@ -1,0 +1,27 @@
+#!/bin/bash -l
+
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+
+echo "Running job $JOB_ID"
+echo "Started: $(date +%F)"
+echo "Running in directory: $PWD"
+
+module load salmon
+
+# Original Method:
+# Generate salmon index
+
+# salmon index -t /projectnb/bf528/users/group_3/Project_4/Data_Curator/gencode.v43.transcripts.fa.gz \
+# -i /projectnb/bf528/users/group_3/Project_4/Data_Curator/salmon_index/
+
+# echo "Index generation finished: $(date +%F)"
+
+
+# Method2: genertae index with -- genecode flag
+
+salmon index -t /projectnb/bf528/users/group_3/Project_4/Data_Curator/gencode.v43.transcripts.fa.gz \
+-i /projectnb/bf528/users/group_3/Project_4/Data_Curator/salmon_index_gencode_flag/ --gencode

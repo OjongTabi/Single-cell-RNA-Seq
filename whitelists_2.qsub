@@ -1,0 +1,26 @@
+#!/bin/bash -l
+
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+
+echo "Running job $JOB_ID"
+echo "Started: $(date +%F)"
+echo "Running in directory: $PWD"
+
+# Generate individual white list
+awk '$2 >= 250 {print $1}' /projectnb/bf528/users/group_3/Project_4/Data_Curator/SRR3879604_barcode_counts.txt > /projectnb/bf528/users/group_3/Project_4/Data_Curator/whitelist_SRR3879604.txt
+awk '$2 >= 250 {print $1}' /projectnb/bf528/users/group_3/Project_4/Data_Curator/SRR3879605_barcode_counts.txt > /projectnb/bf528/users/group_3/Project_4/Data_Curator/whitelist_SRR3879605.txt
+awk '$2 >= 250 {print $1}' /projectnb/bf528/users/group_3/Project_4/Data_Curator/SRR3879606_barcode_counts.txt > /projectnb/bf528/users/group_3/Project_4/Data_Curator/whitelist_SRR3879606.txt
+
+echo "Individual whitelist finished: $(date +%F)"
+
+# Remove duplicate and combine to individual white list
+
+cat whitelist_SRR3879604.txt whitelist_SRR3879605.txt whitelist_SRR3879606.txt | \
+sort | \
+uniq > /projectnb/bf528/users/group_3/Project_4/Data_Curator/combined_whitelist.txt
+
+echo "Job finished: $(date +%F)"
